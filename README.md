@@ -27,57 +27,34 @@ Dưới đây là nội dung README hướng dẫn sử dụng cho ứng dụng 
    pip install django
    pip install ortools
    ```
+3. **Thiết lập models**  
+   File `scheduling/models.py` để định nghĩa các mô hình dữ liệu như `Worker`, `Machine`, và `Job`.
 
-3. **Tạo dự án Django**  
-   Chạy lệnh sau để tạo một dự án mới:
-   ```
-   django-admin startproject production_planning
-   cd production_planning
-   ```
+4. **Đăng ký models trong admin**  
+    `scheduling/admin.py` để quản lý dữ liệu qua giao diện admin.
 
-4. **Tạo ứng dụng Django**  
-   Trong thư mục dự án, chạy:
-   ```
-   python manage.py startapp scheduling
-   ```
-
-5. **Thiết lập models**  
-   Sao chép mã nguồn từ tài liệu hướng dẫn (nếu có) vào file `scheduling/models.py` để định nghĩa các mô hình dữ liệu như `Worker`, `Machine`, và `Job`.
-
-6. **Đăng ký models trong admin**  
-   Sao chép mã từ hướng dẫn vào `scheduling/admin.py` để quản lý dữ liệu qua giao diện admin.
-
-7. **Tạo và áp dụng migrations**  
+5. **Tạo và áp dụng migrations**  
    Chạy các lệnh sau để tạo bảng cơ sở dữ liệu:
    ```
    python manage.py makemigrations
    python manage.py migrate
    ```
 
-8. **Tạo tài khoản quản trị (superuser)**  
+6. **Tạo tài khoản quản trị (superuser)**  
    Chạy lệnh sau và làm theo hướng dẫn để tạo tài khoản:
    ```
    python manage.py createsuperuser
    ```
 
-9. **Thêm dữ liệu mẫu**  
+7. **Thêm dữ liệu mẫu**  
    Khởi động server bằng lệnh:
    ```
    python manage.py runserver
    ```
    Sau đó, truy cập `http://127.0.0.1:8000/admin` để thêm dữ liệu cho `Worker` (nhân viên), `Machine` (thiết bị), và `Job` (công việc).
 
-10. **Tạo file solver**  
-    Sao chép mã từ hướng dẫn vào `scheduling/solver.py` để xử lý bài toán lập lịch.
-
-11. **Tạo view**  
-    Sao chép mã từ hướng dẫn vào `scheduling/views.py` để định nghĩa cách hiển thị lịch trình.
-
-12. **Tạo template**  
-    Tạo thư mục `templates` trong thư mục `scheduling`, sau đó sao chép mã từ hướng dẫn vào file `schedule.html`.
-
-13. **Thiết lập URL**  
-    Sao chép mã từ hướng dẫn vào `production_planning/urls.py` để định tuyến đến trang lịch trình.
+8.  **File solver**  
+     `scheduling/solver.py` để xử lý bài toán lập lịch.
 
 ## Cấu hình
 - Ứng dụng không yêu cầu cấu hình đặc biệt. Tuy nhiên, hãy đảm bảo rằng dữ liệu đã được nhập đầy đủ và chính xác thông qua giao diện admin trước khi sử dụng.
@@ -130,5 +107,3 @@ Dưới đây là nội dung README hướng dẫn sử dụng cho ứng dụng 
   - Kiểm tra file `urls.py` để xác nhận rằng đường dẫn đã được cấu hình đúng.
 
 ---
-
-Hy vọng README này sẽ giúp bạn cài đặt và sử dụng ứng dụng một cách dễ dàng. Nếu có bất kỳ thắc mắc nào, hãy kiểm tra lại các bước hoặc liên hệ người phát triển để được hỗ trợ!

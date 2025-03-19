@@ -11,7 +11,7 @@
         <h2>Phân bổ nhân lực</h2>
         <ul>
         {% for assignment in result.worker_assignments %}
-            <li>Nhân viên {{ assignment.worker_id }} - Công việc {{ assignment.job_id }}: {{ assignment.start_time }} đến {{ assignment.end_time }}</li>
+            <li>Nhân viên {{ assignment.worker_name }} - Công việc {{ assignment.job_id }}: Từ {{ assignment.start_time }} đến {{ assignment.end_time }}</li>
         {% endfor %}
         </ul>
 
