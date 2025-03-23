@@ -38,7 +38,9 @@ Dưới đây là nội dung README hướng dẫn sử dụng cho ứng dụng 
    ```
    python manage.py makemigrations
    python manage.py migrate
+   python manage.py populate_data 
    ```
+   Chú ý: lệnh python manage.py populate_data  là lệnh tạo dữ liệu chuẩn, dữ liệu càng nhiều thì điều chỉnh tham số buget trong file production_planning/core/views.py càng lớn sẽ ra kết quả
 
 6. **Tạo tài khoản quản trị (superuser)**  
    Chạy lệnh sau và làm theo hướng dẫn để tạo tài khoản:

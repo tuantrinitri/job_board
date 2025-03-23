@@ -1,0 +1,80 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header page-header-light">
+      <div class="page-header-content header-elements-md-inline">
+        <div class="page-title d-flex">
+          <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> - MACHINE</h4>
+          <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+        </div>
+      </div>
+
+      <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+        <div class="d-flex">
+          <div class="breadcrumb">
+            <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+            <span class="breadcrumb-item active">Machine</span>
+          </div>
+
+          <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Content area -->
+    <div class="content">
+      <div class="card mt-2">
+        <div class="card-header header-elements-inline">
+          <div class="right">
+            <a href="{% url 'machine_create' %}"><i class="icon-folder-plus3"></i> Tạo mới</a>
+          </div>
+        </div>
+      </div>
+      <!-- Dashboard content -->
+      <div class="row">
+        <div class="col-xl-12">
+          <!-- Marketing campaigns -->
+          <div class="card">
+            <div class="table-responsive">
+              <table class="table text-nowrap">
+                <thead>
+                  <tr>
+                    <th>Tên</th>
+                    <th>Loại thiết bị</th>
+                    <th>Công suất</th>
+                    <th>Trạng thái</th>
+                    <th>Số giờ tối đa có thể hoạt động</th>
+                    <th>Chi phí sử dụng</th>
+                    <th class="text-center" style="width: 20px;">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for machine in machines_data %}
+                    <tr>
+                      <td>{{ machine.name }}</td>
+                      <td>{{ machine.type }}</td>
+                      <td>{{ machine.capacity }}</td>
+                      <td>{{ machine.status }}</td>
+                      <td>{{ machine.max_hours_per_day }}/24</td>
+                      <td>{{ machine.operating_cost }}</td>
+                      <td class="text-center">
+                        <a href="{% url 'machine_edit' machine.id %}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{% url 'machine_delete' machine.id %}" class="btn btn-sm btn-danger">Delete</a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /marketing campaigns -->
+        </div>
+      </div>
+      <!-- /dashboard content -->
+    </div>
+    <!-- /content area -->
+  </div>
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header page-header-light">
+      <div class="page-header-content header-elements-md-inline">
+        <div class="page-title d-flex">
+          <h4>
+            <i class="icon-arrow-left52 mr-2"></i> 
+            <span class="font-weight-semibold">Home</span> - WORKER
+          </h4>
+          <a href="#" class="header-elements-toggle text-default d-md-none">
+            <i class="icon-more"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+        <div class="d-flex">
+          <div class="breadcrumb">
+            <a href="{% url 'dashboard' %}" class="breadcrumb-item">
+              <i class="icon-home2 mr-2"></i> Home
+            </a>
+            <a href="{% url 'worker' %}" class="breadcrumb-item">Worker</a>
+            <span class="breadcrumb-item active">Edit</span>
+          </div>
+          <a href="#" class="header-elements-toggle text-default d-md-none">
+            <i class="icon-more"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Worker Form -->
+    <div class="card mt-2">
+      <div class="card-header header-elements-inline">
+        <h5 class="card-title">
+          {% if worker.id %}
+            Chỉnh sửa {{ worker.name }}
+          {% else %}
+            Tạo mới
+          {% endif %}
+        </h5>
+      </div>
+
+      <div class="card-body">
+        <form 
+          action="{% if worker.id %}{% url 'worker_edit' worker.id %}{% else %}{% url 'worker_create' %}{% endif %}" 
+          method="post">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <label>Name:</label>
+            <input 
+            required
+              type="text" 
+              class="form-control" 
+              name="name" 
+              placeholder="Nguyễn Văn A" 
+              value="{{ worker.name }}" 
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Productivity:</label>
+            <input 
+            required
+              type="number" 
+              class="form-control" 
+              name="productivity" 
+              placeholder="Năng suất" 
+              step="0.1"
+              value="{{ worker.productivity }}" 
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Salary:</label>
+            <input 
+            required
+              type="number" 
+              class="form-control" 
+              name="salary" 
+              placeholder="Lương cơ bản" 
+              value="{{ worker.salary }}" 
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Overtime Cost:</label>
+            <input 
+            required
+              type="number" 
+              class="form-control" 
+              name="overtime_cost" 
+              placeholder="Chi phí làm thêm giờ" 
+              value="{{ worker.overtime_cost }}" 
+            />
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Skills:</label>
+                <select required class="form-control" multiple name="skills">
+                  {% for skill in skills %}
+                    <option 
+                      value="{{ skill.id }}" 
+                      {% if worker and skill in worker.skills.all %}selected{% endif %}
+                    >
+                      {{ skill.name }}
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Shifts:</label>
+                <select required class="form-control" multiple name="shifts">
+                  {% for shift in shifts %}
+                    <option 
+                      value="{{ shift.id }}" 
+                      {% if worker and shift in worker.shifts.all %}selected{% endif %}
+                    >
+                      {{ shift.name }}
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-right">
+            <button type="submit" class="btn btn-primary">
+              Submit form <i class="icon-paperplane ml-2"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header page-header-light">
+      <div class="page-header-content header-elements-md-inline">
+        <div class="page-title d-flex">
+          <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> - WORKER</h4>
+          <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+        </div>
+      </div>
+
+      <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+        <div class="d-flex">
+          <div class="breadcrumb">
+            <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+            <span class="breadcrumb-item active">Workder</span>
+          </div>
+
+          <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Content area -->
+    <div class="content">
+      <div class="card mt-2">
+        <div class="card-header header-elements-inline">
+          <div class="right">
+            <a href="{% url 'worker_create' %}"><i class="icon-folder-plus3"></i> Tạo mới</a>
+          </div>
+        </div>
+      </div>
+      <!-- Dashboard content -->
+      <div class="row">
+        <div class="col-xl-12">
+          <!-- Marketing campaigns -->
+          <div class="card">
+            <div class="table-responsive">
+              <table class="table text-nowrap">
+                <thead>
+                  <tr>
+                    <th>Tên nhân viên</th>
+                    <th>Kỹ năng</th>
+                    <th>Ca làm việc</th>
+                    <th>Năng suất</th>
+                    <th>Lương cơ bản</th>
+                    <th>Chi phí làm thêm giờ</th>
+                    <th class="text-center" style="width: 20px;">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for worker in workers_data %}
+                    <tr>
+                      <td>{{ worker.name }}</td>
+                      <td>{{ worker.skills }}</td>
+                      <td>{{ worker.shifts }}</td>
+                      <td>{{ worker.productivity }}</td>
+                      <td>{{ worker.salary }}</td>
+                      <td>{{ worker.overtime_cost }}</td>
+                      <td class="text-center">
+                        <a href="{% url 'worker_edit' worker.id %}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{% url 'worker_delete' worker.id %}" class="btn btn-sm btn-danger">Delete</a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /marketing campaigns -->
+        </div>
+      </div>
+      <!-- /dashboard content -->
+    </div>
+    <!-- /content area -->
+  </div>
+{% endblock %}

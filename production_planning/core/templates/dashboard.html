@@ -1,0 +1,129 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+  <!-- Main content -->
+  <div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header page-header-light">
+      <div class="page-header-content header-elements-md-inline">
+        <div class="page-title d-flex">
+          <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> - Dashboard</h4>
+          <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+        </div>
+      </div>
+
+      <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+        <div class="d-flex">
+          <div class="breadcrumb">
+            <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+            <span class="breadcrumb-item active">Dashboard</span>
+          </div>
+
+          <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Content area -->
+    <div class="content">
+      <!-- Production Scheduling Results -->
+      <div class="card">
+        <div class="card-header header-elements-inline">
+          <h5 class="card-title">Production Scheduling Results</h5>
+        </div>
+
+        <div class="card-body">
+          {% if result.error %}
+            <div class="alert alert-danger">{{ result.error }}</div>
+          {% else %}
+            <div class="row">
+              <div class="col-md-6">
+                <h6>Worker Assignments</h6>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Worker Name</th>
+                      <th>Job ID</th>
+                      <th>Start Time</th>
+                      <th>End Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for assignment in result.worker_assignments %}
+                      <tr>
+                        <td>{{ assignment.worker_name }}</td>
+                        <td>{{ assignment.job_id }}</td>
+                        <td>{{ assignment.start_time }}</td>
+                        <td>{{ assignment.end_time }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="col-md-6">
+                <h6>Machine Assignments</h6>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Machine ID</th>
+                      <th>Job ID</th>
+                      <th>Start Time</th>
+                      <th>End Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for assignment in result.machine_assignments %}
+                      <tr>
+                        <td>{{ assignment.machine_id }}</td>
+                        <td>{{ assignment.job_id }}</td>
+                        <td>{{ assignment.start_time }}</td>
+                        <td>{{ assignment.end_time }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <h6>Completed Jobs</h6>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Job ID</th>
+                      <th>Actual Completion</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for job in result.completed_jobs %}
+                      <tr>
+                        <td>{{ job.job_id }}</td>
+                        <td>{{ job.actual_completion }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="col-md-6">
+                <h6>Summary</h6>
+                <ul class="list-group">
+                  <li class="list-group-item">Total Cost: {{ result.total_cost }}</li>
+                  <li class="list-group-item">Jobs Completed: {{ result.jobs_completed }}</li>
+                  <li class="list-group-item">On-Time Rate: {{ result.on_time_rate }}%</li>
+                  <li class="list-group-item">Execution Time: {{ result.execution_time }} seconds</li>
+                </ul>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <!-- /Production Scheduling Results -->
+    </div>
+    <!-- /content area -->
+  </div>
+  <!-- /main content -->
+{% endblock %}

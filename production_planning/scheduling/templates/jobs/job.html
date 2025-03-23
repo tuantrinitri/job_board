@@ -1,0 +1,90 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header page-header-light">
+      <div class="page-header-content header-elements-md-inline">
+        <div class="page-title d-flex">
+          <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> - JOBS</h4>
+          <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+        </div>
+      </div>
+
+      <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+        <div class="d-flex">
+          <div class="breadcrumb">
+            <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+            <span class="breadcrumb-item active">Job</span>
+          </div>
+
+          <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Content area -->
+    <div class="content">
+      <div class="card mt-2">
+        <div class="card-header header-elements-inline">
+          <div class="right">
+            <a href="{% url 'job_create' %}"><i class="icon-folder-plus3"></i> Tạo mới</a>
+          </div>
+        </div>
+      </div>
+      <!-- Dashboard content -->
+      <div class="row">
+        <div class="col-xl-12">
+          <!-- Marketing campaigns -->
+          <div class="card">
+            <div class="table-responsive">
+              <table class="table text-nowrap">
+                <thead>
+                  <tr>
+                    <th>Tên công việc</th>
+                    <th>Loại sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Hạn chót</th>
+                    <th>Ưu tiên</th>
+                    <th>Kỹ năng yêu cầu</th>
+                    <th>Loại thiết bị cần thiết</th>
+                    <th>Công việc trước đó</th>
+                    <th class="text-center" style="width: 20px;">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for job in jobs %}
+                    <tr>
+                      <td>{{ job.name }}</td>
+                      <td>{{ job.product_type }}</td>
+                      <td>{{ job.quantity }}</td>
+                      <td>{{ job.deadline }}</td>
+                      <td>{{ job.get_priority_display }}</td>
+                      <td>{{ job.required_skills.all|join:', ' }}</td>
+                      <td>{{ job.required_machine_type }}</td>
+                      <td>
+                        {% if job.predecessor %}
+                          {{ job.predecessor.name }}
+                        {% else %}
+                          None
+                        {% endif %}
+                      </td>
+                      <td class="text-center">
+                        <a href="{% url 'job_edit' job.id %}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{% url 'job_delete' job.id %}" class="btn btn-sm btn-danger">Delete</a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /marketing campaigns -->
+        </div>
+      </div>
+      <!-- /dashboard content -->
+    </div>
+    <!-- /content area -->
+  </div>
+{% endblock %}

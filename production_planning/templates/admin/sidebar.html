@@ -1,0 +1,45 @@
+{% load static %}
+<!-- Main sidebar -->
+<div class="sidebar sidebar-light sidebar-main sidebar-expand-md">
+  <!-- Sidebar content -->
+  <div class="sidebar-content">
+    <!-- Main navigation -->
+    <div class="card card-sidebar-mobile">
+      <ul class="nav nav-sidebar" data-nav-type="accordion">
+        <!-- Main -->
+        <li class="nav-item-header">
+          <div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard' %}" class="nav-link">
+            <i class="icon-home4"></i>
+            <span>
+              Dashboard
+              <span class="d-block font-weight-normal opacity-50"></span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'worker' %}" class="nav-link">
+            <i class="icon-user"></i>
+            <span>Workers</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'jobs' %}" class="nav-link">
+            <i class="icon-grid"></i>
+            <span>Jobs</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'machines' %}" class="nav-link">
+            <i class="icon-portfolio"></i>
+            <span>Machines</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- /main navigation -->
+  </div>
+  <!-- /sidebar content -->
+</div>
