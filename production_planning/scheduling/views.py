@@ -233,3 +233,33 @@ def production_schedule(request):
     budget = 1000000  # Ngân sách cố định (có thể lấy từ request)
     result = solve_production_scheduling(budget)
     return render(request, "schedule.html", {"result": result})
+
+
+# skils
+def skills(request):
+    skills = Skill.objects.all()
+    return render(request, "skills/list_skill.html", {"skills": skills})
+
+
+# create skill and edit skill
+def add_skill(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        Skill.objects.create(name=name)
+        return redirect("skills")
+    return render(request, "skills/form.html", {"skill": {}})
+
+
+def edit_skill(request, id):
+    skill = get_object_or_404(Skill, id=id)
+    if request.method == "POST":
+        skill.name = request.POST.get("name")
+        skill.save()
+        return redirect("skills")
+    return render(request, "skills/form.html", {"skill": skill})
+
+
+def delete_skill(request, id):
+    skill = Skill.objects.get(id=id)
+    skill.delete()
+    return redirect("skills")

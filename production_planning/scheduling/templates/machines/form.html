@@ -18,8 +18,8 @@
         <div class="d-flex">
           <div class="breadcrumb">
             <a href="{% url 'dashboard' %}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-            <a href="{% url 'machines' %}" class="breadcrumb-item">Machine</a>
-            <span class="breadcrumb-item active">{% if machine.id %}Edit{% else %}Create{% endif %}</span>
+            <a href="{% url 'machines' %}" class="breadcrumb-item">Máy moc</a>
+            <span class="breadcrumb-item active">{% if machine.id %}Chỉnh sửa{% else %}Tạo mới{% endif %}</span>
           </div>
           <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
         </div>
@@ -31,9 +31,9 @@
       <div class="card-header header-elements-inline">
         <h5 class="card-title">
           {% if machine.id %}
-            Edit {{ machine.name }}
+            Chỉnh sửa {{ machine.name }}
           {% else %}
-            Create New Machine
+           Tạo mới
           {% endif %}
         </h5>
       </div>
@@ -43,36 +43,36 @@
           {% csrf_token %}
 
           <div class="form-group">
-            <label>Name:</label>
+            <label>Tên máy:</label>
             <input required type="text" class="form-control" name="name" placeholder="Machine Name" value="{{ machine.name }}" />
           </div>
 
           <div class="form-group">
-            <label>Type:</label>
+            <label>Loại máy:</label>
             <input required type="text" class="form-control" name="type" placeholder="Machine Type" value="{{ machine.type }}" />
           </div>
 
           <div class="form-group">
-            <label>Capacity:</label>
+            <label>Công suất:</label>
             <input required type="number" class="form-control" name="capacity" placeholder="Capacity" value="{{ machine.capacity }}" />
           </div>
 
           <div class="form-group">
-            <label>Status:</label>
+            <label>Trạng thái:</label>
             <select required class="form-control" name="status">
-              <option value="available" {% if machine.status == "available" %} selected {% endif %}>Available</option>
-              <option value="maintenance" {% if machine.status == "maintenance" %} selected {% endif %}>Maintenance</option>
-              <option value="occupied" {% if machine.status == "occupied" %} selected {% endif %}>Occupied</option>
+              <option value="available" {% if machine.status == "available" %} selected {% endif %}>Sẵn sàng</option>
+              <option value="maintenance" {% if machine.status == "maintenance" %} selected {% endif %}>Bảo trì</option>
+                <option value="occupied" {% if machine.status == "occupied" %} selected {% endif %}>Đang sử dụng</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label>Max Hours Per Day:</label>
+            <label>Số giờ tối đa mỗi ngày:</label>
             <input required type="number" class="form-control" name="max_hours_per_day" placeholder="Max Hours Per Day" value="{{ machine.max_hours_per_day }}" />
           </div>
 
           <div class="form-group">
-            <label>Operating Cost:</label>
+            <label>Chi phí vận hành:</label>
             <input required type="number" class="form-control" name="operating_cost" placeholder="Operating Cost" value="{{ machine.operating_cost }}" />
           </div>
 

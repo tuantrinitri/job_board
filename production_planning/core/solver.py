@@ -24,6 +24,7 @@ def solve_production_scheduling(budget):
         return {"error": "Không có công việc để lập lịch"}
 
     model = cp_model.CpModel()
+    # khung thời gian tối đa để hoàn thành công việc
     horizon = max((int(job.deadline.timestamp()) for job in jobs), default=1)
 
     job_intervals, job_starts, job_ends = {}, {}, {}
@@ -143,8 +144,8 @@ def solve_production_scheduling(budget):
 
     # Thiết lập bộ giải ràng buộc
     solver = cp_model.CpSolver()
-    solver.parameters.max_time_in_seconds = 30
-    solver.parameters.num_search_workers = 4
+    solver.parameters.max_time_in_seconds = 30  # thời gian toi da thuc hien trong
+    solver.parameters.num_search_workers = 4  # thay đổi trong request
 
     status = solver.Solve(model)
 
@@ -188,7 +189,7 @@ def solve_production_scheduling(budget):
                 worker_results.append(
                     {
                         "worker_name": assigned_worker.name,
-                        "job_id": job.id,
+                        "job_id": job.name,
                         "start_time": formatted_start,
                         "end_time": formatted_end,
                     }
@@ -196,21 +197,24 @@ def solve_production_scheduling(budget):
             if assigned_machine:
                 machine_results.append(
                     {
-                        "machine_id": assigned_machine.id,
-                        "job_id": job.id,
+                        "machine_id": assigned_machine.name,
+                        "job_id": job.name,
                         "start_time": formatted_start,
                         "end_time": formatted_end,
                     }
                 )
 
             completed_jobs.append(
-                {"job_id": job.id, "actual_completion": formatted_end}
+                {"job_id": job.name, "actual_completion": formatted_end}
             )
             jobs_completed += 1
             if actual_end <= int(job.deadline.timestamp()):
                 on_time_jobs += 1
 
         return {
+            # "execution_time": execution_time,
+            "jobs_completed": jobs_completed,
+            "on_time_rate": on_time_jobs / jobs_completed,
             "worker_assignments": worker_results,
             "machine_assignments": machine_results,
             "completed_jobs": completed_jobs,

@@ -61,8 +61,8 @@
                       <td>{{ machine.max_hours_per_day }}/24</td>
                       <td>{{ machine.operating_cost }}</td>
                       <td class="text-center">
-                        <a href="{% url 'machine_edit' machine.id %}" class="btn btn-sm btn-primary">Edit</a>
-                        <a href="{% url 'machine_delete' machine.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="{% url 'machine_edit' machine.id %}" class="btn btn-sm btn-primary">Sửa</a>
+                        <a href="{% url 'machine_delete' machine.id %}" class="btn btn-sm btn-danger">Xóa</a>
                       </td>
                     </tr>
                   {% endfor %}

@@ -4,16 +4,20 @@ from django.urls import path
 from scheduling.views import (
     add_job,
     add_machine,
+    add_skill,
     add_worker,
     delete_job,
     delete_machine,
+    delete_skill,
     delete_worker,
     edit_job,
     edit_machine,
+    edit_skill,
     edit_worker,
     jobs,
     list_machine,
     production_schedule,
+    skills,
     worker,
 )
 from core import views as core_views
@@ -48,4 +52,9 @@ urlpatterns = [
     # delete job
     path("job/delete/<int:id>/", delete_job, name="job_delete"),
     path("production-schedule/", production_schedule, name="production_schedule"),
+    # skills
+    path("skills/", skills, name="skills"),
+    path("skills/create/", add_skill, name="skill_create"),
+    path("skills/<int:id>/", edit_skill, name="skill_edit"),
+    path("skills/delete/<int:id>/", delete_skill, name="skill_delete"),
 ]

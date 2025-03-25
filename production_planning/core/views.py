@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -10,7 +11,7 @@ from core.solver import solve_production_scheduling
 # Create your views here.
 @login_required
 def dashboard(request):
-    budget = 1000000  # Ngân sách cố định (có thể lấy từ request)
+    budget = request.GET.get("budget")
     result = solve_production_scheduling(budget)
     return render(request, "dashboard.html", {"result": result})
 

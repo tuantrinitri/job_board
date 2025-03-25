@@ -20,21 +20,29 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{% url 'jobs' %}" class="nav-link">
+            <i class="icon-grid"></i>
+            <span>Công việc</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
           <a href="{% url 'worker' %}" class="nav-link">
             <i class="icon-user"></i>
-            <span>Workers</span>
+            <span>Công nhân</span>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'jobs' %}" class="nav-link">
-            <i class="icon-grid"></i>
-            <span>Jobs</span>
+          <a href="{% url 'skills' %}" class="nav-link">
+            <i class="icon-user"></i>
+            <span>Kỹ năng</span>
           </a>
         </li>
+
         <li class="nav-item">
           <a href="{% url 'machines' %}" class="nav-link">
             <i class="icon-portfolio"></i>
-            <span>Machines</span>
+            <span>Máy móc</span>
           </a>
         </li>
       </ul>
